@@ -33,6 +33,25 @@ document.addEventListener('DOMContentLoaded', function () {
     { text: "TURURURURU", time: 140, spanish: "TURURURURU" },
   ];
 
+  let wakeLock = null;
+
+  async function requestWakeLock() {
+    try {
+      wakeLock = await navigator.wakeLock.request('screen');
+      console.log('Wake Lock is active');
+    } catch (err) {
+      console.error(`Failed to acquire wake lock: ${err}`);
+    }
+  }
+
+  async function releaseWakeLock() {
+    if (wakeLock !== null) {
+      await wakeLock.release();
+      wakeLock = null;
+      console.log('Wake Lock has been released');
+    }
+  }
+
   //funcion titulo
   // Función para ocultar el título después de 216 segundos
   function ocultarTitulo() {
@@ -69,8 +88,14 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   }
 
+  audio.addEventListener('play', requestWakeLock);
+  audio.addEventListener('pause', releaseWakeLock);
+  audio.addEventListener('ended', releaseWakeLock);
+
   setInterval(updateLyrics, 1000);
 
   setTimeout(ocultarTitulo, 13000);
+
+  
 });
 
