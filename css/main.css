@@ -1866,4 +1866,80 @@ h1 {
   }
 }
 
-/* Agregar más estilos según sea necesario */
+/* Estilos generales para letras */
+#lyrics-container {
+  position: absolute;
+  bottom: 20%; /* Ajusta la posición del contenedor */
+  width: 90%; /* Cambia el ancho para dejar espacio para los márgenes */
+  left: 5%; /* Centra el contenedor */
+  right: 5%; /* Centra el contenedor */
+  text-align: center;
+  z-index: 1;
+}
+
+#lyrics-english {
+  font-size: 28px;
+  font-family: "Poppins", sans-serif;
+  color: white;
+  font-weight: bold;
+  letter-spacing: 4px;
+  margin-bottom: 10px; /* Espacio entre letras en inglés y español */
+}
+
+#lyrics-spanish {
+  font-size: 22px;
+  font-family: "Poppins", sans-serif;
+  color: #ffcc00; /* Cambia a un color diferente para el español */
+  font-weight: bold;
+  letter-spacing: 2px;
+}
+
+/* Responsivo para diferentes dispositivos */
+@media only screen and (max-width: 1080px) {
+  #lyrics-english {
+    font-size: 70px;
+    letter-spacing: 3px;
+    margin-bottom: 5px; /* Ajusta el espacio en pantallas pequeñas */
+  }
+
+  #lyrics-spanish {
+    font-size: 65px;
+    letter-spacing: 2px;
+  }
+
+  #lyrics-container {
+    bottom: 70%; /* Ajusta la posición del contenedor */
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  #lyrics-english {
+    font-size: 18px;
+    letter-spacing: 2px;
+  }
+
+  #lyrics-spanish {
+    font-size: 14px;
+    letter-spacing: 1.5px;
+  }
+
+  #lyrics-container {
+    bottom: 75%; /* Ajusta la posición del contenedor */
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  #lyrics-english {
+    font-size: 16px;
+    letter-spacing: 1px;
+  }
+
+  #lyrics-spanish {
+    font-size: 12px;
+    letter-spacing: 1px;
+  }
+
+  #lyrics-container {
+    bottom: 80%; /* Ajusta la posición del contenedor */
+  }
+}

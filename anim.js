@@ -1,76 +1,76 @@
-document.addEventListener('DOMContentLoaded', function() {
-  // Sincronizar las letras con la canción
-var audio = document.querySelector("audio");
-var lyrics = document.querySelector("#lyrics");
+document.addEventListener('DOMContentLoaded', function () {
+  var audio = document.querySelector("audio");
+  var lyricsEnglish = document.querySelector("#lyrics-english");
+  var lyricsSpanish = document.querySelector("#lyrics-spanish");
 
+  var lyricsData = [
+    { text: "At the time", time: 15, spanish: "En ese momento" },
+    { text: "The whisper of birds", time: 18, spanish: "El susurro de los pájaros" },
+    { text: "Lonely before the sun cried", time: 27, spanish: "Solo antes de que llorara el sol" },
+    { text: "Fell from the sky", time: 32, spanish: "Cayó del cielo" },
+    { text: "Like water drops", time: 33, spanish: "Como gotas de agua" },
+    { text: "Where I'm now? I don't know why", time: 41, spanish: "¿Dónde estoy ahora? No sé por qué" },
+    { text: "Nice butterflies in my hands", time: 47, spanish: "Mariposas bonitas en mis manos" },
+    { text: "Too much light for twilight", time: 54, spanish: "Demasiada luz para el crepúsculo" },
+    { text: "In the mood for the flowers love", time: 59, spanish: "Con ánimo para el amor de las flores" },
+    { text: "That vision", time: 67, spanish: "Esa visión" },
+    { text: "Really strong, blew my mind", time: 72, spanish: "Muy fuerte, me voló la mente" },
+    { text: "Silence Let me see what it was", time: 78, spanish: "Silencio, déjame ver qué era" },
+    { text: "I only want to live in clouds", time: 83, spanish: "Solo quiero vivir en las nubes" },
+    { text: "Where I'm now? I don't know why", time: 91, spanish: "¿Dónde estoy ahora? No sé por qué" },
+    { text: "Nice butterflies in my hands", time: 97, spanish: "Mariposas bonitas en mis manos" },
+    { text: "Too much light for twilight", time: 104, spanish: "Demasiada luz para el crepúsculo" },
+    { text: "In the mood for the flowers love", time: 108, spanish: "Con ánimo para el amor de las flores" },
+    { text: "At the time", time: 144, spanish: "En ese momento" },
+    { text: "The whisper of birds", time: 148, spanish: "El susurro de los pájaros" },
+    { text: "Lonely before the sun cried", time: 153, spanish: "Solo antes de que llorara el sol" },
+    { text: "Fell from the sky", time: 158, spanish: "Cayó del cielo" },
+    { text: "Like water drops", time: 164, spanish: "Como gotas de agua" },
+    { text: "Where I'm now? I don't know why", time: 169, spanish: "¿Dónde estoy ahora? No sé por qué" },
+    { text: "Nice butterflies in my hands", time: 176, spanish: "Mariposas bonitas en mis manos" },
+    { text: "Too much light for twilight", time: 183, spanish: "Demasiada luz para el crepúsculo" },
+    { text: "In the mood for the flowers", time: 188, spanish: "Con ánimo para las flores" },
+    { text: "TURURURURU", time: 140, spanish: "TURURURURU" },
+  ];
 
-
-// Array de objetos que contiene cada línea y su tiempo de aparición en segundos
-var lyricsData = [
-  { text: "At the time", time: 15 },
-  { text: "The whisper of birds", time: 18 },
-  { text: "Lonely before the sun cried", time: 27 },
-  { text: "Fell from the sky", time: 32 },
-  { text: "Like water drops", time: 33 },
-  { text: "Where I'm now? I don't know why", time: 41 },
-  { text: "Nice butterflies in my hands", time: 47 },
-  { text: "Too much light for twilight", time: 54 },
-  { text: "In the mood for the flowers love", time: 59 },
-  { text: "That vision", time: 67 },
-  { text: "Really strong, blew my mind", time: 72 },
-  { text: "Silence Let me see what it was", time: 78 },
-  { text: "I only want to live in clouds", time: 83 },
-  { text: "Where I'm now? I don't know why", time: 91 },
-  { text: "Nice butterflies in my hands", time: 97 },
-  { text: "Too much light for twilight", time: 104 },
-  { text: "In the mood for the flowers love", time: 108 },
-  { text: "At the time", time: 144 },
-  { text: "The whisper of birds", time: 148 },
-  { text: "Lonely before the sun cried", time: 153 },
-  { text: "Fell from the sky", time: 158 },
-  { text: "Like water drops", time: 164 },
-  { text: "Where I'm now? I don't know why", time: 169 },
-  { text: "Nice butterflies in my hands", time: 176 },
-  { text: "Too much light for twilight", time: 183 },
-  { text: "In the mood for the flowers", time: 188 },
-  { text: "Love.", time: 140 },
-];
-
-// Animar las letras
-function updateLyrics() {
-  var time = Math.floor(audio.currentTime);
-  var currentLine = lyricsData.find(
-    (line) => time >= line.time && time < line.time + 6
-  );
-
-  if (currentLine) {
-    // Calcula la opacidad basada en el tiempo en la línea actual
-    var fadeInDuration = 0.1; // Duración del efecto de aparición en segundos
-    var opacity = Math.min(1, (time - currentLine.time) / fadeInDuration);
-
-    // Aplica el efecto de aparición
-    lyrics.style.opacity = opacity;
-    lyrics.innerHTML = currentLine.text;
-  } else {
-    // Restablece la opacidad y el contenido si no hay una línea actual
-    lyrics.style.opacity = 0;
-    lyrics.innerHTML = "";
+  //funcion titulo
+  // Función para ocultar el título después de 216 segundos
+  function ocultarTitulo() {
+    var titulo = document.querySelector(".titulo");
+    titulo.style.animation =
+      "fadeOut 3s ease-in-out forwards"; /* Duración y función de temporización de la desaparición */
+    setTimeout(function () {
+      titulo.style.display = "none";
+    }, 3000); // Espera 3 segundos antes de ocultar completamente
   }
-}
 
-setInterval(updateLyrics, 1000);
+  function updateLyrics() {
+    var time = Math.floor(audio.currentTime);
+    var currentLine = lyricsData.find(
+      (line) => time >= line.time && time < line.time + 6
+    );
 
-//funcion titulo
-// Función para ocultar el título después de 216 segundos
-function ocultarTitulo() {
-  var titulo = document.querySelector(".titulo");
-  titulo.style.animation =
-    "fadeOut 3s ease-in-out forwards"; /* Duración y función de temporización de la desaparición */
-  setTimeout(function () {
-    titulo.style.display = "none";
-  }, 3000); // Espera 3 segundos antes de ocultar completamente
-}
+    if (currentLine) {
+      var fadeInDuration = 0.1;
+      var opacity = Math.min(1, (time - currentLine.time) / fadeInDuration);
 
-// Llama a la función después de 216 segundos (216,000 milisegundos)
-setTimeout(ocultarTitulo, 13000);
-} );
+      // Letras en inglés
+      lyricsEnglish.style.opacity = opacity;
+      lyricsEnglish.innerHTML = currentLine.text;
+
+      // Letras en español
+      lyricsSpanish.style.opacity = opacity;
+      lyricsSpanish.innerHTML = currentLine.spanish;
+    } else {
+      lyricsEnglish.style.opacity = 0;
+      lyricsEnglish.innerHTML = "";
+      lyricsSpanish.style.opacity = 0;
+      lyricsSpanish.innerHTML = "";
+    }
+  }
+
+  setInterval(updateLyrics, 1000);
+
+  setTimeout(ocultarTitulo, 13000);
+});
+
